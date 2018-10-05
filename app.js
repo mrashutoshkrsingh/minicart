@@ -130,6 +130,6 @@ app.use('/cart', cart);
 app.use('/', pages);
 
 
-app.listen(3000||process.env.PORT,process.env.ID,function(){
+app.listen(process.env.PORT,process.env.ID,function(){
     console.log("Server started");
 })
