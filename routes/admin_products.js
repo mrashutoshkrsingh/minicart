@@ -3,13 +3,14 @@ var app=express.Router()
 var mkdirp=require("mkdirp")
 var fs=require("fs-extra")
 var resizeImg=require("resize-img")
-
+var auth = require('../config/auth');
+var isAdmin = auth.isAdmin;
 var Product=require("../models/product")
 
 var Category = require('../models/category');
 
 
-app.get("/",function(req,res){
+app.get("/",isAdmin,function(req,res){
     var count;
 
     Product.count(function (err, c) {
@@ -26,7 +27,7 @@ app.get("/",function(req,res){
     });
 })
 
-app.get("/add-product",function(req,res){
+app.get("/add-product",isAdmin,function(req,res){
     var title="";
     var desc="";
     var price="";
@@ -42,7 +43,7 @@ app.get("/add-product",function(req,res){
     })
 })
 
-app.post("/add-product",function(req,res){
+app.post("/add-product",isAdmin,function(req,res){
     var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
 
     req.checkBody('title', 'Title must have a value.').notEmpty();
@@ -145,7 +146,7 @@ app.post("/add-product",function(req,res){
 
 
 
-app.get("/edit-product/:id",function(req,res){
+app.get("/edit-product/:id",isAdmin,function(req,res){
     
     var errors;
 
@@ -192,7 +193,7 @@ app.get("/edit-product/:id",function(req,res){
     
 })
 
-app.post("/edit-product/:id",function(req,res){
+app.post("/edit-product/:id",isAdmin,function(req,res){
     var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
 
     req.checkBody('title', 'Title must have a value.').notEmpty();
@@ -273,7 +274,7 @@ app.post("/edit-product/:id",function(req,res){
     }
 })
 
-app.post('/product-gallery/:id', function (req, res) {
+app.post('/product-gallery/:id',isAdmin, function (req, res) {
 
     var productImage = req.files.file;
     var id = req.params.id;
@@ -294,7 +295,7 @@ app.post('/product-gallery/:id', function (req, res) {
 });
 
 
-app.get('/delete-image/:image', function (req, res) {
+app.get('/delete-image/:image',isAdmin, function (req, res) {
 
     var originalImage = 'public/product_images/' + req.query.id + '/gallery/' + req.params.image;
     var thumbImage = 'public/product_images/' + req.query.id + '/gallery/thumbs/' + req.params.image;
@@ -315,7 +316,7 @@ app.get('/delete-image/:image', function (req, res) {
     });
 });
 
-app.get('/delete-product/:id', function (req, res) {
+app.get('/delete-product/:id',isAdmin, function (req, res) {
 
     var id = req.params.id;
     var path = 'public/product_images/' + id;

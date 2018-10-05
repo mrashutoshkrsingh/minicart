@@ -18,7 +18,7 @@
 
 </head>
 
-  <body>
+  <body >
 
   <nav class="navbar navbar-inverse">
   <div class="container">
@@ -34,17 +34,18 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          
+      
         <li class="dropdown">
           <a href="/products" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Categories<span class="caret"></span></a>
           <ul class="dropdown-menu">
+          <%if(categories){%>
           <% categories.forEach(function(c){ %>
           <li><a href="/products/<%= c.slug %>"><%= c.title %></a></li>
-      <% }); %>
-          
-          <li role="separator" class="divider"></li>
+      <% }); }%>
+      <li role="separator" class="divider"></li>
             <li><a href="/products">All Products</a></li>
-            </ul>
+          </ul>
+          
         </li>
         <% pages.forEach(function(page){ %>
             <% if (page.slug !="home") { %>
@@ -66,13 +67,20 @@
         <!--<li><a href="#">Link</a></li>-->
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><% if (user) { %>
+          Hi, <%= user.username  %><%}%><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#">Log out</a></li>
+          <% if (!user) { %>
+            <li><a href="/users/login">Log In</a></li>
+            <li><a href="/users/register">Sign Up</a></li>
+            <% } else {%>
+            <li><a href="/users/logout">Log out</a></li>
+            <% }%>
           </ul>
         </li>
+        <% if (user && user.admin == 1) { %>
+                        <li><a href="/admin/pages">Admin Area</a></li>
+                        <% }%>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -34,8 +34,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-      <li><a href="#">Link</a></li>
+      
         <li class="dropdown">
           <a href="/products" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Categories<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -67,16 +66,30 @@
         <!--<li><a href="#">Link</a></li>-->
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><% if (user) { %>
+          Hi, <%= user.username  %><%}%><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
-            <li><a href="#">Log out</a></li>
+          <% if (!user) { %>
+            <li><a href="/users/login">Log In</a></li>
+            <li><a href="/users/register">Sign Up</a></li>
+            <% } else {%>
+            <li><a href="/users/logout">Log out</a></li>
+            <% }%>
           </ul>
         </li>
+        <% if (user && user.admin == 1) { %>
+                        <li><a href="/admin/pages">Admin Area</a></li>
+                        <% }%>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <div class="container" style="padding-top: 40px;">
 <%- messages('messages', locals) %>
+<% if (errors) {%>
+    <% errors.forEach(function(error) { %>
+    <div class="alert alert-danger">
+        <%= error.msg %>
+    </div>
+    <% });%>
+<% }%>

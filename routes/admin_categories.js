@@ -1,7 +1,10 @@
 var express=require("express")
 var app=express.Router()
 var Category=require("../models/category")
-app.get("/",function(req,res){
+var auth = require('../config/auth');
+var isAdmin = auth.isAdmin;
+
+app.get("/",isAdmin,function(req,res){
     Category.find(function (err, categories) {
         if(err)
         return console.log(err)
@@ -11,7 +14,7 @@ app.get("/",function(req,res){
 })
 })
 
-app.get("/add-category",function(req,res){
+app.get("/add-category",isAdmin,function(req,res){
     var title="";
     
     res.render("admin/add_category",{
@@ -19,7 +22,7 @@ app.get("/add-category",function(req,res){
     })
 })
 
-app.post("/add-category",function(req,res){
+app.post("/add-category",isAdmin,function(req,res){
     var slug=null;
     req.checkBody("title","Title must have a value").notEmpty();
     var title=req.body.title;
@@ -87,7 +90,7 @@ app.post("/add-category",function(req,res){
 
 
 
-app.get("/edit-category/:id",function(req,res){
+app.get("/edit-category/:id",isAdmin,function(req,res){
     Category.findById(req.params.id,function(err,category){
         if(err) return console.log(err) 
         res.render("admin/edit_category",{
@@ -100,7 +103,7 @@ app.get("/edit-category/:id",function(req,res){
     
 })
 
-app.post("/edit-category/:id",function(req,res){
+app.post("/edit-category/:id",isAdmin,function(req,res){
     var slug=null;
     req.checkBody("title","Title must have a value").notEmpty();
     var title=req.body.title;
@@ -172,7 +175,7 @@ app.post("/edit-category/:id",function(req,res){
     }
 })
 
-app.get("/delete-category/:id",function(req,res){
+app.get("/delete-category/:id",isAdmin,function(req,res){
     Category.findByIdAndRemove(req.params.id,function(err){
         if(err)  return console.log(err)
         Category.find(function (err, categories) {

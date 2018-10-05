@@ -1,0 +1,86 @@
+<%include ./_layouts/header%>
+<div class="container">
+
+<form class="well form-horizontal" action="/users/register" method="post"  id="contact_form">
+<fieldset>
+
+<legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+
+
+
+<div class="form-group">
+<label class="col-md-4 control-label">Name</label>  
+<div class="col-md-4 inputGroupContainer">
+<div class="input-group">
+<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input  name="name" placeholder="Name" class="form-control"  type="text">
+</div>
+</div>
+</div>
+
+
+
+<!-- Text input-->
+
+<div class="form-group">
+<label class="col-md-4 control-label">Username</label>  
+<div class="col-md-4 inputGroupContainer">
+<div class="input-group">
+<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input  name="username" placeholder="Username" class="form-control"  type="text">
+</div>
+</div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+<label class="col-md-4 control-label" >Password</label> 
+<div class="col-md-4 inputGroupContainer">
+<div class="input-group">
+<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input name="password" placeholder="Password" class="form-control"  type="password">
+</div>
+</div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+<label class="col-md-4 control-label" >Confirm Password</label> 
+<div class="col-md-4 inputGroupContainer">
+<div class="input-group">
+<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<input name="password2" placeholder="Confirm Password" class="form-control"  type="password">
+</div>
+</div>
+</div>
+
+<!-- Text input-->
+   <div class="form-group">
+<label class="col-md-4 control-label">E-Mail</label>  
+<div class="col-md-4 inputGroupContainer">
+<div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+</div>
+</div>
+</div>
+
+
+<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Success!.</div>
+
+
+<div class="form-group">
+<label class="col-md-4 control-label"></label>
+<div class="col-md-4"><br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+</div>
+</div>
+
+</fieldset>
+</form>
+</div>
+</div>
+
+<%include ./_layouts/footer%>
