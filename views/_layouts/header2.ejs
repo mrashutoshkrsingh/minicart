@@ -56,6 +56,7 @@
       
       <ul class="nav navbar-nav navbar-right">
       <li>
+      <% if (user) { %>
       <a href="/cart/checkout">My Cart (
           <% if (typeof cart !== "undefined") { %>
           <%= cart.length %>
@@ -63,6 +64,7 @@
           0
           <% } %>
       )</a>
+      <% } %>
   </li>
         <!--<li><a href="#">Link</a></li>-->
         
