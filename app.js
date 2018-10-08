@@ -140,6 +140,6 @@ app.use('/users', users);
 app.use('/', pages);
 
 
-app.listen(process.env.PORT,process.env.ID,function(){
+app.listen(3000||process.env.PORT,process.env.ID,function(){
     console.log("Server started");
 })
