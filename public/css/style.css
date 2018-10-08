@@ -245,3 +245,10 @@ footer{
 	background-color: #f2dede;
 	border-color: #ebccd1;
 }
+
+.fixedbutton {
+	position: fixed;
+	bottom: 50%;
+	right: 0;
+	transform: rotate(90deg); 
+}
