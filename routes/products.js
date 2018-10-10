@@ -50,7 +50,7 @@ router.get('/:category', function (req, res) {
 router.get('/:category/:product', function (req, res) {
 
     var galleryImages = null;
-    console.log(req.params)
+    //console.log(req.params)
     Product.findOne({slug: req.params.product}, function (err, product) {
         if (err) {
             console.log(err);
